@@ -38,7 +38,7 @@ const problems = {
  * Execute code with test cases
  * POST /api/code/execute
  */
-router.post('/execute', auth, async (req, res) => {
+router.post('/execute', protect, async (req, res) => {
   try {
     const { problemId, code, language } = req.body;
 
@@ -140,7 +140,7 @@ router.post('/execute', auth, async (req, res) => {
  * Get all problems
  * GET /api/code/problems
  */
-router.get('/problems', auth, async (req, res) => {
+router.get('/problems', protect, async (req, res) => {
   try {
     const problemList = Object.entries(problems).map(([id, problem]) => ({
       id: parseInt(id),
@@ -165,7 +165,7 @@ router.get('/problems', auth, async (req, res) => {
  * Get specific problem with test cases
  * GET /api/code/problems/:problemId
  */
-router.get('/problems/:problemId', auth, async (req, res) => {
+router.get('/problems/:problemId', protect, async (req, res) => {
   try {
     const { problemId } = req.params;
     const problem = problems[problemId];
@@ -196,7 +196,7 @@ router.get('/problems/:problemId', auth, async (req, res) => {
  * Submit solution for evaluation
  * POST /api/code/submit
  */
-router.post('/submit', auth, async (req, res) => {
+router.post('/submit', protect, async (req, res) => {
   try {
     const { problemId, code, language } = req.body;
 
