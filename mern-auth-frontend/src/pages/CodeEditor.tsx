@@ -298,11 +298,11 @@ export function CodeEditor() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-900 via-blue-900 to-gray-900 p-6">
+    <div className="min-h-screen bg-gradient-to-br from-slate-950 via-blue-950 to-slate-950 p-6">
       <div className="max-w-7xl mx-auto">
         {/* Header */}
         <div className="mb-8">
-          <h1 className="text-5xl font-bold text-white mb-2">💻 DSA Code Master</h1>
+              <h1 className="text-5xl font-bold text-white mb-2">💻 DSA Code Master</h1>
           <p className="text-blue-300">Practice coding problems and get intelligent hints</p>
         </div>
 
@@ -433,9 +433,9 @@ export function CodeEditor() {
                         <span className="text-blue-300">Case {idx + 1}:</span> {testCase.input}
                       </div>
                       {testResults.find(r => r.id === testCase.id)?.passed ? (
-                        <span className="text-green-400 font-bold">✅ PASS</span>
+                        <span className="text-emerald-300 font-extrabold">✅ PASS</span>
                       ) : testResults.find(r => r.id === testCase.id) ? (
-                        <span className="text-red-400 font-bold">❌ FAIL</span>
+                        <span className="text-rose-300 font-extrabold">❌ FAIL</span>
                       ) : (
                         <span className="text-gray-400 font-bold">⏳ PENDING</span>
                       )}
@@ -464,7 +464,7 @@ export function CodeEditor() {
             {/* Output */}
             <div className="bg-gradient-to-br from-gray-800 to-gray-900 rounded-xl shadow-2xl p-6 border border-gray-700">
               <h3 className="text-xl font-bold text-white mb-4">📊 Output</h3>
-              <div className="bg-gray-950 text-green-400 p-4 rounded-lg font-mono text-sm whitespace-pre-wrap min-h-24 border border-gray-700">
+              <div className="bg-gray-950 text-green-200 p-4 rounded-lg font-mono text-sm whitespace-pre-wrap min-h-24 border border-slate-800 shadow-inner">
                 {output || '💬 Output will appear here after running tests...'}
               </div>
             </div>

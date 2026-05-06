@@ -53,17 +53,17 @@ export const Register: React.FC = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-green-50 to-green-100 flex items-center justify-center px-4 py-12">
-      <div className="bg-white rounded-2xl shadow-2xl max-w-md w-full p-8">
+    <div className="min-h-screen bg-gradient-to-br from-emerald-50 via-green-50 to-teal-50 flex items-center justify-center px-4 py-12">
+      <div className="w-full max-w-md rounded-3xl shadow-2xl border border-white/60 bg-white/70 backdrop-blur p-8">
         {/* Header */}
         <div className="text-center mb-8">
-          <h2 className="text-3xl font-bold text-gray-800 mb-2">Create Account</h2>
+          <h2 className="text-3xl font-extrabold text-gray-900 mb-2">Create Account</h2>
           <p className="text-gray-600">Join us today</p>
         </div>
 
         {/* Error Message */}
         {error && (
-          <div className="bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded-lg mb-6">
+          <div className="bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded-xl mb-6 font-medium">
             {error}
           </div>
         )}
@@ -72,7 +72,7 @@ export const Register: React.FC = () => {
         <form onSubmit={handleSubmit} className="space-y-4">
           {/* Name Field */}
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-2">
+            <label className="block text-sm font-semibold text-gray-700 mb-2">
               Full Name
             </label>
             <input
@@ -80,14 +80,14 @@ export const Register: React.FC = () => {
               value={name}
               onChange={(e) => setName(e.target.value)}
               placeholder="John Doe"
-              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent transition"
+              className="w-full px-4 py-2.5 border border-gray-200 rounded-xl bg-white focus:outline-none focus:ring-2 focus:ring-emerald-500/60 focus:border-emerald-400 transition"
               disabled={isLoading}
             />
           </div>
 
           {/* Email Field */}
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-2">
+            <label className="block text-sm font-semibold text-gray-700 mb-2">
               Email Address
             </label>
             <input
@@ -95,14 +95,14 @@ export const Register: React.FC = () => {
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               placeholder="you@example.com"
-              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent transition"
+              className="w-full px-4 py-2.5 border border-gray-200 rounded-xl bg-white focus:outline-none focus:ring-2 focus:ring-emerald-500/60 focus:border-emerald-400 transition"
               disabled={isLoading}
             />
           </div>
 
           {/* Password Field */}
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-2">
+            <label className="block text-sm font-semibold text-gray-700 mb-2">
               Password
             </label>
             <input
@@ -110,14 +110,14 @@ export const Register: React.FC = () => {
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               placeholder="••••••••"
-              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent transition"
+              className="w-full px-4 py-2.5 border border-gray-200 rounded-xl bg-white focus:outline-none focus:ring-2 focus:ring-emerald-500/60 focus:border-emerald-400 transition"
               disabled={isLoading}
             />
           </div>
 
           {/* Confirm Password Field */}
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-2">
+            <label className="block text-sm font-semibold text-gray-700 mb-2">
               Confirm Password
             </label>
             <input
@@ -125,7 +125,7 @@ export const Register: React.FC = () => {
               value={confirmPassword}
               onChange={(e) => setConfirmPassword(e.target.value)}
               placeholder="••••••••"
-              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent transition"
+              className="w-full px-4 py-2.5 border border-gray-200 rounded-xl bg-white focus:outline-none focus:ring-2 focus:ring-emerald-500/60 focus:border-emerald-400 transition"
               disabled={isLoading}
             />
           </div>
@@ -134,7 +134,7 @@ export const Register: React.FC = () => {
           <button
             type="submit"
             disabled={isLoading}
-            className="w-full bg-gradient-to-r from-green-600 to-green-700 text-white font-semibold py-2 rounded-lg hover:from-green-700 hover:to-green-800 transition duration-200 disabled:opacity-50 disabled:cursor-not-allowed"
+            className="w-full bg-gradient-to-r from-green-600 to-emerald-700 text-white font-bold py-3 rounded-xl hover:from-green-700 hover:to-emerald-800 transition duration-200 disabled:opacity-50 disabled:cursor-not-allowed shadow-md"
           >
             {isLoading ? 'Creating Account...' : 'Create Account'}
           </button>
@@ -144,9 +144,9 @@ export const Register: React.FC = () => {
         <div className="my-6 border-t border-gray-200"></div>
 
         {/* Login Link */}
-        <p className="text-center text-gray-600">
+        <p className="text-center text-gray-600 text-sm">
           Already have an account?{' '}
-          <Link to="/login" className="text-green-600 hover:text-green-700 font-semibold">
+          <Link to="/login" className="text-emerald-700 hover:text-emerald-800 font-bold">
             Sign in here
           </Link>
         </p>

@@ -5,7 +5,7 @@ export const Home: React.FC = () => {
   const navigate = useNavigate();
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-500 via-blue-600 to-indigo-700">
+    <div className="min-h-screen bg-gradient-to-br from-indigo-700 via-blue-700 to-slate-900">
       {/* Hero Section */}
       <div className="max-w-6xl mx-auto px-4 py-20 sm:py-32 flex flex-col items-center justify-center text-center">
         <h1 className="text-5xl sm:text-6xl font-bold text-white mb-6 leading-tight">
@@ -32,27 +32,27 @@ export const Home: React.FC = () => {
         </div>
 
         {/* Features Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mt-16 w-full">
-          <div className="bg-white bg-opacity-10 backdrop-blur-lg rounded-2xl p-8 border border-white border-opacity-20">
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mt-16 w-full">
+          <div className="bg-white/10 backdrop-blur-lg rounded-2xl p-8 border border-white/30 shadow-[0_0_0_1px_rgba(255,255,255,0.06)] hover:bg-white/12 transition">
             <div className="text-4xl mb-4">🔐</div>
             <h3 className="text-2xl font-bold text-white mb-3">Secure</h3>
-            <p className="text-blue-100">
+            <p className="text-white/80">
               Industry-standard bcrypt password hashing and JWT token authentication
             </p>
           </div>
 
-          <div className="bg-white bg-opacity-10 backdrop-blur-lg rounded-2xl p-8 border border-white border-opacity-20">
+          <div className="bg-white/10 backdrop-blur-lg rounded-2xl p-8 border border-white/30 shadow-[0_0_0_1px_rgba(255,255,255,0.06)] hover:bg-white/12 transition">
             <div className="text-4xl mb-4">⚡</div>
             <h3 className="text-2xl font-bold text-white mb-3">Fast</h3>
-            <p className="text-blue-100">
+            <p className="text-white/80">
               Built with modern technologies for optimal performance and user experience
             </p>
           </div>
 
-          <div className="bg-white bg-opacity-10 backdrop-blur-lg rounded-2xl p-8 border border-white border-opacity-20">
+          <div className="bg-white/10 backdrop-blur-lg rounded-2xl p-8 border border-white/30 shadow-[0_0_0_1px_rgba(255,255,255,0.06)] hover:bg-white/12 transition">
             <div className="text-4xl mb-4">📱</div>
             <h3 className="text-2xl font-bold text-white mb-3">Responsive</h3>
-            <p className="text-blue-100">
+            <p className="text-white/80">
               Beautiful, responsive design that works on all devices and screen sizes
             </p>
           </div>
