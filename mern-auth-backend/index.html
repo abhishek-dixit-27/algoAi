@@ -1,0 +1,1306 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MERN Authentication Backend - Project Showcase</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/atom-one-dark.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        /* Header */
+        .header {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 40px 30px;
+            border-radius: 10px;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            text-align: center;
+        }
+
+        .header h1 {
+            font-size: 2.5em;
+            color: #667eea;
+            margin-bottom: 10px;
+        }
+
+        .header p {
+            font-size: 1.1em;
+            color: #666;
+            margin-bottom: 20px;
+        }
+
+        .badges {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            flex-wrap: wrap;
+            margin-top: 20px;
+        }
+
+        .badge {
+            display: inline-block;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 0.9em;
+            font-weight: bold;
+        }
+
+        /* Section */
+        .section {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 30px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        .section h2 {
+            color: #667eea;
+            font-size: 1.8em;
+            margin-bottom: 20px;
+            border-bottom: 3px solid #667eea;
+            padding-bottom: 10px;
+        }
+
+        .section h3 {
+            color: #764ba2;
+            font-size: 1.3em;
+            margin-top: 20px;
+            margin-bottom: 15px;
+        }
+
+        /* Code */
+        pre {
+            background: #282c34;
+            padding: 15px;
+            border-radius: 8px;
+            overflow-x: auto;
+            margin: 15px 0;
+            border-left: 4px solid #667eea;
+        }
+
+        code {
+            font-family: 'Courier New', monospace;
+            font-size: 0.95em;
+        }
+
+        .inline-code {
+            background: #f0f0f0;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-family: 'Courier New', monospace;
+            color: #764ba2;
+        }
+
+        /* File Tree */
+        .file-tree {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 8px;
+            font-family: 'Courier New', monospace;
+            margin: 15px 0;
+            border-left: 4px solid #667eea;
+        }
+
+        .file-tree-item {
+            padding: 5px 0;
+            color: #333;
+        }
+
+        .file-tree-folder {
+            color: #667eea;
+            font-weight: bold;
+        }
+
+        .file-tree-file {
+            color: #764ba2;
+            margin-left: 20px;
+        }
+
+        /* Features List */
+        .features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 15px;
+            margin: 20px 0;
+        }
+
+        .feature-card {
+            background: linear-gradient(135deg, #667eea15 0%, #764ba215 100%);
+            padding: 20px;
+            border-radius: 8px;
+            border-left: 4px solid #667eea;
+            transition: transform 0.3s ease;
+        }
+
+        .feature-card:hover {
+            transform: translateX(5px);
+        }
+
+        .feature-card strong {
+            color: #667eea;
+            display: block;
+            margin-bottom: 8px;
+        }
+
+        /* API Table */
+        .api-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 15px 0;
+            background: #f8f9fa;
+        }
+
+        .api-table th,
+        .api-table td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .api-table th {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            font-weight: bold;
+        }
+
+        .api-table tr:hover {
+            background: #f0f0f0;
+        }
+
+        /* Method Badge */
+        .method {
+            display: inline-block;
+            padding: 4px 12px;
+            border-radius: 4px;
+            font-weight: bold;
+            font-size: 0.85em;
+            color: white;
+        }
+
+        .method-post {
+            background: #28a745;
+        }
+
+        .method-get {
+            background: #007bff;
+        }
+
+        .method-put {
+            background: #ffc107;
+        }
+
+        .method-delete {
+            background: #dc3545;
+        }
+
+        /* Tab Navigation */
+        .tabs {
+            display: flex;
+            gap: 10px;
+            margin: 20px 0;
+            flex-wrap: wrap;
+            border-bottom: 2px solid #667eea;
+        }
+
+        .tab-btn {
+            padding: 10px 20px;
+            background: transparent;
+            border: none;
+            cursor: pointer;
+            font-size: 1em;
+            font-weight: 500;
+            color: #666;
+            border-bottom: 3px solid transparent;
+            transition: all 0.3s ease;
+        }
+
+        .tab-btn.active {
+            color: #667eea;
+            border-bottom-color: #667eea;
+        }
+
+        .tab-content {
+            display: none;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        /* Installation */
+        .install-step {
+            background: #f8f9fa;
+            padding: 20px;
+            margin: 15px 0;
+            border-radius: 8px;
+            border-left: 4px solid #667eea;
+        }
+
+        .install-step h4 {
+            color: #667eea;
+            margin-bottom: 10px;
+        }
+
+        /* Footer */
+        .footer {
+            text-align: center;
+            color: white;
+            padding: 20px;
+            margin-top: 40px;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 1.8em;
+            }
+
+            .section {
+                padding: 20px;
+            }
+
+            pre {
+                font-size: 0.85em;
+            }
+
+            .features {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Highlight.js Custom */
+        .hljs {
+            background: #282c34 !important;
+            color: #abb2bf !important;
+        }
+
+        .hljs-attr {
+            color: #e06c75;
+        }
+
+        .hljs-string {
+            color: #98c379;
+        }
+
+        .hljs-number {
+            color: #d19a66;
+        }
+
+        .hljs-literal {
+            color: #56b6c2;
+        }
+
+        .hljs-function {
+            color: #61afef;
+        }
+
+        /* Quick Links */
+        .quick-links {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            margin-top: 20px;
+        }
+
+        .quick-link {
+            display: inline-block;
+            padding: 10px 20px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: transform 0.3s ease;
+        }
+
+        .quick-link:hover {
+            transform: translateY(-2px);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <div class="header">
+            <h1>🚀 MERN Authentication Backend</h1>
+            <p>A Complete, Production-Ready Authentication API</p>
+            <div class="badges">
+                <span class="badge">Node.js</span>
+                <span class="badge">Express</span>
+                <span class="badge">MongoDB</span>
+                <span class="badge">JWT</span>
+                <span class="badge">Bcrypt</span>
+                <span class="badge">Mongoose</span>
+            </div>
+        </div>
+
+        <!-- Features Section -->
+        <div class="section">
+            <h2>✨ Key Features</h2>
+            <div class="features">
+                <div class="feature-card">
+                    <strong>🔐 User Authentication</strong>
+                    Register and login with JWT token generation
+                </div>
+                <div class="feature-card">
+                    <strong>🛡️ Secure Passwords</strong>
+                    Bcryptjs hashing with salt rounds
+                </div>
+                <div class="feature-card">
+                    <strong>🗄️ MongoDB Integration</strong>
+                    Atlas connection with Mongoose ODM
+                </div>
+                <div class="feature-card">
+                    <strong>🔑 Protected Routes</strong>
+                    JWT middleware for route protection
+                </div>
+                <div class="feature-card">
+                    <strong>✅ Input Validation</strong>
+                    Email, password, and field validation
+                </div>
+                <div class="feature-card">
+                    <strong>🌐 CORS Enabled</strong>
+                    Cross-origin requests configured
+                </div>
+                <div class="feature-card">
+                    <strong>📝 Error Handling</strong>
+                    Proper try-catch and error responses
+                </div>
+                <div class="feature-card">
+                    <strong>🚀 Deployment Ready</strong>
+                    Ready for Render, Heroku, AWS
+                </div>
+            </div>
+        </div>
+
+        <!-- Project Structure -->
+        <div class="section">
+            <h2>📁 Project Structure</h2>
+            <div class="file-tree">
+                <div class="file-tree-item"><span class="file-tree-folder">mern-auth-backend/</span></div>
+                <div class="file-tree-item"><span class="file-tree-folder">├── config/</span></div>
+                <div class="file-tree-item"><span class="file-tree-file">│   └── db.js</span></div>
+                <div class="file-tree-item"><span class="file-tree-folder">├── controllers/</span></div>
+                <div class="file-tree-item"><span class="file-tree-file">│   └── authController.js</span></div>
+                <div class="file-tree-item"><span class="file-tree-folder">├── middleware/</span></div>
+                <div class="file-tree-item"><span class="file-tree-file">│   └── auth.js</span></div>
+                <div class="file-tree-item"><span class="file-tree-folder">├── models/</span></div>
+                <div class="file-tree-item"><span class="file-tree-file">│   └── User.js</span></div>
+                <div class="file-tree-item"><span class="file-tree-folder">├── routes/</span></div>
+                <div class="file-tree-item"><span class="file-tree-file">│   └── authRoutes.js</span></div>
+                <div class="file-tree-item"><span class="file-tree-file">├── server.js</span></div>
+                <div class="file-tree-item"><span class="file-tree-file">├── package.json</span></div>
+                <div class="file-tree-item"><span class="file-tree-file">├── .env</span></div>
+                <div class="file-tree-item"><span class="file-tree-file">├── .env.example</span></div>
+                <div class="file-tree-item"><span class="file-tree-file">├── .gitignore</span></div>
+                <div class="file-tree-item"><span class="file-tree-file">├── README.md</span></div>
+                <div class="file-tree-item"><span class="file-tree-file">└── index.html (this file)</span></div>
+            </div>
+        </div>
+
+        <!-- Installation Section -->
+        <div class="section">
+            <h2>⚙️ Installation & Setup</h2>
+
+            <div class="install-step">
+                <h4>Step 1: Install Dependencies</h4>
+                <pre><code class="language-bash">npm install</code></pre>
+            </div>
+
+            <div class="install-step">
+                <h4>Step 2: Set Up MongoDB Atlas</h4>
+                <ol style="margin-left: 20px; line-height: 2;">
+                    <li>Visit <a href="https://www.mongodb.com/cloud/atlas" target="_blank">MongoDB Atlas</a></li>
+                    <li>Create a free cluster</li>
+                    <li>Create a database user</li>
+                    <li>Get your connection URI</li>
+                    <li>Copy URI to .env file</li>
+                </ol>
+            </div>
+
+            <div class="install-step">
+                <h4>Step 3: Configure Environment Variables</h4>
+                <p>Create a <span class="inline-code">.env</span> file in the root directory:</p>
+                <pre><code class="language-env">NODE_ENV=development
+PORT=5000
+MONGO_URI=mongodb+srv://username:password@cluster.mongodb.net/mern-auth?retryWrites=true&w=majority
+JWT_SECRET=your_super_secret_jwt_key_change_this_in_production
+JWT_EXPIRE=7d</code></pre>
+            </div>
+
+            <div class="install-step">
+                <h4>Step 4: Run the Server</h4>
+                <p><strong>Development (with hot reload):</strong></p>
+                <pre><code class="language-bash">npm run dev</code></pre>
+                <p style="margin-top: 10px;"><strong>Production:</strong></p>
+                <pre><code class="language-bash">npm start</code></pre>
+                <p style="margin-top: 10px; color: #667eea; font-weight: bold;">✓ Server running at http://localhost:5000</p>
+            </div>
+        </div>
+
+        <!-- API Documentation -->
+        <div class="section">
+            <h2>📡 API Endpoints</h2>
+
+            <table class="api-table">
+                <thead>
+                    <tr>
+                        <th>Method</th>
+                        <th>Endpoint</th>
+                        <th>Description</th>
+                        <th>Auth Required</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><span class="method method-post">POST</span></td>
+                        <td><span class="inline-code">/api/auth/register</span></td>
+                        <td>Register new user</td>
+                        <td>❌ No</td>
+                    </tr>
+                    <tr>
+                        <td><span class="method method-post">POST</span></td>
+                        <td><span class="inline-code">/api/auth/login</span></td>
+                        <td>Login user & get token</td>
+                        <td>❌ No</td>
+                    </tr>
+                    <tr>
+                        <td><span class="method method-get">GET</span></td>
+                        <td><span class="inline-code">/api/auth/profile</span></td>
+                        <td>Get user profile</td>
+                        <td>✅ Yes</td>
+                    </tr>
+                    <tr>
+                        <td><span class="method method-get">GET</span></td>
+                        <td><span class="inline-code">/api/health</span></td>
+                        <td>Health check</td>
+                        <td>❌ No</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h3>Register User</h3>
+            <p><strong>POST</strong> <span class="inline-code">/api/auth/register</span></p>
+            <p><strong>Request:</strong></p>
+            <pre><code class="language-json">{
+  "name": "John Doe",
+  "email": "john@example.com",
+  "password": "password123"
+}</code></pre>
+            <p><strong>Response (201):</strong></p>
+            <pre><code class="language-json">{
+  "success": true,
+  "message": "User registered successfully",
+  "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...",
+  "user": {
+    "id": "507f1f77bcf86cd799439011",
+    "name": "John Doe",
+    "email": "john@example.com"
+  }
+}</code></pre>
+
+            <h3>Login User</h3>
+            <p><strong>POST</strong> <span class="inline-code">/api/auth/login</span></p>
+            <p><strong>Request:</strong></p>
+            <pre><code class="language-json">{
+  "email": "john@example.com",
+  "password": "password123"
+}</code></pre>
+            <p><strong>Response (200):</strong></p>
+            <pre><code class="language-json">{
+  "success": true,
+  "message": "Login successful",
+  "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...",
+  "user": {
+    "id": "507f1f77bcf86cd799439011",
+    "name": "John Doe",
+    "email": "john@example.com"
+  }
+}</code></pre>
+
+            <h3>Get User Profile (Protected)</h3>
+            <p><strong>GET</strong> <span class="inline-code">/api/auth/profile</span></p>
+            <p><strong>Headers:</strong></p>
+            <pre><code class="language-text">Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...</code></pre>
+            <p><strong>Response (200):</strong></p>
+            <pre><code class="language-json">{
+  "success": true,
+  "user": {
+    "id": "507f1f77bcf86cd799439011",
+    "name": "John Doe",
+    "email": "john@example.com",
+    "createdAt": "2024-01-15T10:30:00.000Z"
+  }
+}</code></pre>
+        </div>
+
+        <!-- Code Files Section -->
+        <div class="section">
+            <h2>📄 Code Files</h2>
+
+            <div class="tabs">
+                <button class="tab-btn active" onclick="showTab(event, 'server')">server.js</button>
+                <button class="tab-btn" onclick="showTab(event, 'db')">config/db.js</button>
+                <button class="tab-btn" onclick="showTab(event, 'user')">models/User.js</button>
+                <button class="tab-btn" onclick="showTab(event, 'auth-middleware')">middleware/auth.js</button>
+                <button class="tab-btn" onclick="showTab(event, 'auth-controller')">controllers/authController.js</button>
+                <button class="tab-btn" onclick="showTab(event, 'auth-routes')">routes/authRoutes.js</button>
+                <button class="tab-btn" onclick="showTab(event, 'package')">package.json</button>
+                <button class="tab-btn" onclick="showTab(event, 'env')">Environment Variables</button>
+            </div>
+
+            <!-- server.js -->
+            <div id="server" class="tab-content active">
+                <h3>server.js - Entry Point</h3>
+                <pre><code class="language-javascript">const express = require('express');
+const cors = require('cors');
+require('dotenv').config();
+const connectDB = require('./config/db');
+
+// Import routes
+const authRoutes = require('./routes/authRoutes');
+
+// Initialize Express app
+const app = express();
+
+// Connect to MongoDB
+connectDB();
+
+// Middleware
+app.use(express.json());
+app.use(cors());
+
+/**
+ * Logging Middleware
+ * Logs incoming requests
+ */
+app.use((req, res, next) => {
+  console.log(`[${new Date().toISOString()}] ${req.method} ${req.path}`);
+  next();
+});
+
+/**
+ * Routes
+ */
+app.use('/api/auth', authRoutes);
+
+/**
+ * Health Check Route
+ */
+app.get('/api/health', (req, res) => {
+  res.status(200).json({
+    success: true,
+    message: 'Server is running',
+    timestamp: new Date().toISOString(),
+  });
+});
+
+/**
+ * 404 Handler
+ */
+app.use('*', (req, res) => {
+  res.status(404).json({
+    success: false,
+    message: 'Route not found',
+  });
+});
+
+// Start server
+const PORT = process.env.PORT || 5000;
+app.listen(PORT, () => {
+  console.log(`\n🚀 Server running on port ${PORT}`);
+  console.log(`📍 Environment: ${process.env.NODE_ENV || 'development'}`);
+  console.log(`🔐 Auth endpoints: /api/auth/register, /api/auth/login, /api/auth/profile\n`);
+});
+
+// Graceful shutdown
+process.on('SIGTERM', () => {
+  console.log('SIGTERM received, shutting down gracefully');
+  process.exit(0);
+});</code></pre>
+            </div>
+
+            <!-- config/db.js -->
+            <div id="db" class="tab-content">
+                <h3>config/db.js - Database Connection</h3>
+                <pre><code class="language-javascript">const mongoose = require('mongoose');
+
+/**
+ * Connect to MongoDB Atlas Database
+ * Uses MONGO_URI from environment variables
+ */
+const connectDB = async () => {
+  try {
+    const conn = await mongoose.connect(process.env.MONGO_URI, {
+      useNewUrlParser: true,
+      useUnifiedTopology: true,
+    });
+
+    console.log(`✓ MongoDB Connected: ${conn.connection.host}`);
+    return conn;
+  } catch (error) {
+    console.error(`✗ MongoDB Connection Error: ${error.message}`);
+    process.exit(1);
+  }
+};
+
+module.exports = connectDB;</code></pre>
+            </div>
+
+            <!-- models/User.js -->
+            <div id="user" class="tab-content">
+                <h3>models/User.js - User Schema</h3>
+                <pre><code class="language-javascript">const mongoose = require('mongoose');
+const bcrypt = require('bcryptjs');
+
+/**
+ * User Schema
+ * Stores user information with encrypted passwords
+ */
+const userSchema = new mongoose.Schema(
+  {
+    name: {
+      type: String,
+      required: [true, 'Please provide a name'],
+      trim: true,
+      maxlength: [50, 'Name cannot be more than 50 characters'],
+    },
+    email: {
+      type: String,
+      required: [true, 'Please provide an email'],
+      unique: true,
+      lowercase: true,
+      match: [/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/, 'Please provide a valid email'],
+    },
+    password: {
+      type: String,
+      required: [true, 'Please provide a password'],
+      minlength: [6, 'Password must be at least 6 characters'],
+      select: false, // Don't include password by default in queries
+    },
+  },
+  {
+    timestamps: true, // Adds createdAt and updatedAt
+  }
+);
+
+/**
+ * Hash password before saving user
+ * This middleware runs before save() is called
+ */
+userSchema.pre('save', async function (next) {
+  // Only hash if password is new or modified
+  if (!this.isModified('password')) {
+    next();
+  }
+
+  try {
+    const salt = await bcrypt.genSalt(10);
+    this.password = await bcrypt.hash(this.password, salt);
+    next();
+  } catch (error) {
+    next(error);
+  }
+});
+
+/**
+ * Method to compare provided password with hashed password
+ */
+userSchema.methods.matchPassword = async function (enteredPassword) {
+  return await bcrypt.compare(enteredPassword, this.password);
+};
+
+module.exports = mongoose.model('User', userSchema);</code></pre>
+            </div>
+
+            <!-- middleware/auth.js -->
+            <div id="auth-middleware" class="tab-content">
+                <h3>middleware/auth.js - JWT Verification</h3>
+                <pre><code class="language-javascript">const jwt = require('jsonwebtoken');
+
+/**
+ * Authentication Middleware
+ * Verifies JWT token and protects routes
+ */
+const protect = (req, res, next) => {
+  let token;
+
+  // Check for token in headers
+  if (req.headers.authorization && req.headers.authorization.startsWith('Bearer')) {
+    token = req.headers.authorization.split(' ')[1];
+  }
+
+  // Ensure token exists
+  if (!token) {
+    return res.status(401).json({
+      success: false,
+      message: 'Not authorized to access this route',
+    });
+  }
+
+  try {
+    // Verify token
+    const decoded = jwt.verify(token, process.env.JWT_SECRET);
+    req.user = decoded;
+    next();
+  } catch (error) {
+    return res.status(401).json({
+      success: false,
+      message: 'Token is invalid or expired',
+    });
+  }
+};
+
+module.exports = { protect };</code></pre>
+            </div>
+
+            <!-- controllers/authController.js -->
+            <div id="auth-controller" class="tab-content">
+                <h3>controllers/authController.js - Authentication Logic</h3>
+                <pre><code class="language-javascript">const User = require('../models/User');
+const jwt = require('jsonwebtoken');
+
+/**
+ * Generate JWT Token
+ */
+const generateToken = (id) => {
+  return jwt.sign({ id }, process.env.JWT_SECRET, {
+    expiresIn: process.env.JWT_EXPIRE || '7d',
+  });
+};
+
+/**
+ * Register User
+ * POST /api/auth/register
+ */
+const register = async (req, res) => {
+  try {
+    const { name, email, password } = req.body;
+
+    // Validate input
+    if (!name || !email || !password) {
+      return res.status(400).json({
+        success: false,
+        message: 'Please provide name, email, and password',
+      });
+    }
+
+    // Check if user already exists
+    let user = await User.findOne({ email });
+    if (user) {
+      return res.status(400).json({
+        success: false,
+        message: 'User already exists with that email',
+      });
+    }
+
+    // Create user
+    user = await User.create({
+      name,
+      email,
+      password,
+    });
+
+    // Generate token
+    const token = generateToken(user._id);
+
+    res.status(201).json({
+      success: true,
+      message: 'User registered successfully',
+      token,
+      user: {
+        id: user._id,
+        name: user.name,
+        email: user.email,
+      },
+    });
+  } catch (error) {
+    console.error('Register Error:', error);
+    res.status(500).json({
+      success: false,
+      message: error.message || 'Error during registration',
+    });
+  }
+};
+
+/**
+ * Login User
+ * POST /api/auth/login
+ */
+const login = async (req, res) => {
+  try {
+    const { email, password } = req.body;
+
+    // Validate input
+    if (!email || !password) {
+      return res.status(400).json({
+        success: false,
+        message: 'Please provide email and password',
+      });
+    }
+
+    // Check for user (include password field)
+    const user = await User.findOne({ email }).select('+password');
+    if (!user) {
+      return res.status(401).json({
+        success: false,
+        message: 'Invalid credentials',
+      });
+    }
+
+    // Compare password
+    const isMatch = await user.matchPassword(password);
+    if (!isMatch) {
+      return res.status(401).json({
+        success: false,
+        message: 'Invalid credentials',
+      });
+    }
+
+    // Generate token
+    const token = generateToken(user._id);
+
+    res.status(200).json({
+      success: true,
+      message: 'Login successful',
+      token,
+      user: {
+        id: user._id,
+        name: user.name,
+        email: user.email,
+      },
+    });
+  } catch (error) {
+    console.error('Login Error:', error);
+    res.status(500).json({
+      success: false,
+      message: error.message || 'Error during login',
+    });
+  }
+};
+
+/**
+ * Get Current User Profile (Protected Route)
+ * GET /api/auth/profile
+ */
+const getProfile = async (req, res) => {
+  try {
+    // req.user is set by auth middleware
+    const user = await User.findById(req.user.id);
+
+    if (!user) {
+      return res.status(404).json({
+        success: false,
+        message: 'User not found',
+      });
+    }
+
+    res.status(200).json({
+      success: true,
+      user: {
+        id: user._id,
+        name: user.name,
+        email: user.email,
+        createdAt: user.createdAt,
+      },
+    });
+  } catch (error) {
+    console.error('Get Profile Error:', error);
+    res.status(500).json({
+      success: false,
+      message: error.message || 'Error fetching profile',
+    });
+  }
+};
+
+module.exports = {
+  register,
+  login,
+  getProfile,
+};</code></pre>
+            </div>
+
+            <!-- routes/authRoutes.js -->
+            <div id="auth-routes" class="tab-content">
+                <h3>routes/authRoutes.js - API Routes</h3>
+                <pre><code class="language-javascript">const express = require('express');
+const { register, login, getProfile } = require('../controllers/authController');
+const { protect } = require('../middleware/auth');
+
+const router = express.Router();
+
+/**
+ * Public Routes
+ */
+
+// Register new user
+router.post('/register', register);
+
+// Login user
+router.post('/login', login);
+
+/**
+ * Protected Routes
+ * Require valid JWT token
+ */
+
+// Get current user profile
+router.get('/profile', protect, getProfile);
+
+module.exports = router;</code></pre>
+            </div>
+
+            <!-- package.json -->
+            <div id="package" class="tab-content">
+                <h3>package.json - Project Dependencies</h3>
+                <pre><code class="language-json">{
+  "name": "mern-auth-backend",
+  "version": "1.0.0",
+  "description": "MERN Stack Authentication Backend API",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "nodemon server.js"
+  },
+  "keywords": [
+    "mern",
+    "authentication",
+    "express",
+    "mongodb",
+    "jwt"
+  ],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.18.2",
+    "mongoose": "^7.0.0",
+    "bcryptjs": "^2.4.3",
+    "jsonwebtoken": "^9.0.0",
+    "dotenv": "^16.0.3",
+    "cors": "^2.8.5"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.20"
+  }
+}</code></pre>
+            </div>
+
+            <!-- Environment Variables -->
+            <div id="env" class="tab-content">
+                <h3>Environment Variables (.env)</h3>
+                <pre><code class="language-env"># Environment
+NODE_ENV=development
+
+# Server
+PORT=5000
+
+# MongoDB
+MONGO_URI=mongodb+srv://username:password@cluster.mongodb.net/mern-auth?retryWrites=true&w=majority
+
+# JWT
+JWT_SECRET=your_super_secret_jwt_key_change_this_in_production
+JWT_EXPIRE=7d</code></pre>
+            </div>
+        </div>
+
+        <!-- Testing Section -->
+        <div class="section">
+            <h2>🧪 Testing with cURL</h2>
+
+            <h3>1. Register User</h3>
+            <pre><code class="language-bash">curl -X POST http://localhost:5000/api/auth/register \
+  -H "Content-Type: application/json" \
+  -d '{"name":"John Doe","email":"john@example.com","password":"password123"}'</code></pre>
+
+            <h3>2. Login User</h3>
+            <pre><code class="language-bash">curl -X POST http://localhost:5000/api/auth/login \
+  -H "Content-Type: application/json" \
+  -d '{"email":"john@example.com","password":"password123"}'</code></pre>
+
+            <h3>3. Get Profile (Replace with your token)</h3>
+            <pre><code class="language-bash">curl -X GET http://localhost:5000/api/auth/profile \
+  -H "Authorization: Bearer YOUR_JWT_TOKEN_HERE"</code></pre>
+
+            <h3>4. Health Check</h3>
+            <pre><code class="language-bash">curl -X GET http://localhost:5000/api/health</code></pre>
+        </div>
+
+        <!-- Dependencies Section -->
+        <div class="section">
+            <h2>📦 Dependencies Overview</h2>
+
+            <h3>Production Dependencies</h3>
+            <ul style="margin-left: 20px; line-height: 2;">
+                <li><strong>express</strong> - Web framework for building REST APIs</li>
+                <li><strong>mongoose</strong> - MongoDB object modeling and validation</li>
+                <li><strong>bcryptjs</strong> - Password hashing and comparison</li>
+                <li><strong>jsonwebtoken</strong> - JWT token creation and verification</li>
+                <li><strong>dotenv</strong> - Environment variable management</li>
+                <li><strong>cors</strong> - Cross-origin resource sharing middleware</li>
+            </ul>
+
+            <h3>Development Dependencies</h3>
+            <ul style="margin-left: 20px; line-height: 2;">
+                <li><strong>nodemon</strong> - Auto-restart server on file changes</li>
+            </ul>
+        </div>
+
+        <!-- Deployment Section -->
+        <div class="section">
+            <h2>🚀 Deployment Guide</h2>
+
+            <h3>Deploy to Render</h3>
+            <ol style="margin-left: 20px; line-height: 2;">
+                <li>Push code to GitHub</li>
+                <li>Go to <a href="https://render.com" target="_blank">render.com</a></li>
+                <li>Create new Web Service</li>
+                <li>Connect your GitHub repository</li>
+                <li>Set environment variables in Render dashboard:
+                    <pre style="margin-top: 10px;"><code class="language-env">MONGO_URI=your_mongodb_uri
+JWT_SECRET=your_strong_secret_key
+NODE_ENV=production
+PORT=5000</code></pre>
+                </li>
+                <li>Deploy automatically on each push</li>
+            </ol>
+
+            <h3>Environment Variables for Production</h3>
+            <ul style="margin-left: 20px; line-height: 2;">
+                <li>Change <span class="inline-code">NODE_ENV</span> to <span class="inline-code">production</span></li>
+                <li>Use a strong, randomly generated <span class="inline-code">JWT_SECRET</span></li>
+                <li>Use MongoDB Atlas connection string for <span class="inline-code">MONGO_URI</span></li>
+                <li>Set appropriate <span class="inline-code">JWT_EXPIRE</span> time</li>
+            </ul>
+        </div>
+
+        <!-- Security Section -->
+        <div class="section">
+            <h2>🔒 Security Features</h2>
+
+            <div class="features">
+                <div class="feature-card">
+                    <strong>🔐 Password Hashing</strong>
+                    Bcryptjs with 10 salt rounds
+                </div>
+                <div class="feature-card">
+                    <strong>🎫 JWT Tokens</strong>
+                    Secure token-based authentication
+                </div>
+                <div class="feature-card">
+                    <strong>✅ Input Validation</strong>
+                    Email format & password requirements
+                </div>
+                <div class="feature-card">
+                    <strong>🚫 Password Hiding</strong>
+                    Password excluded from default queries
+                </div>
+                <div class="feature-card">
+                    <strong>🛡️ Error Safety</strong>
+                    Generic error messages (no info leaks)
+                </div>
+                <div class="feature-card">
+                    <strong>🌍 CORS</strong>
+                    Cross-origin requests configured
+                </div>
+            </div>
+        </div>
+
+        <!-- Architecture Section -->
+        <div class="section">
+            <h2>🏗️ Architecture Overview</h2>
+
+            <h3>MVC Pattern</h3>
+            <ul style="margin-left: 20px; line-height: 2;">
+                <li><strong>Models</strong> (<span class="inline-code">models/User.js</span>) - Database schema and business logic</li>
+                <li><strong>Controllers</strong> (<span class="inline-code">controllers/authController.js</span>) - Request handling and response logic</li>
+                <li><strong>Views</strong> - Not applicable for API backend</li>
+            </ul>
+
+            <h3>Request Flow</h3>
+            <pre style="margin-top: 20px;"><code class="language-text">Client Request
+    ↓
+Express Middleware (JSON parser, CORS, logging)
+    ↓
+Router (Route matching)
+    ↓
+Auth Middleware (JWT verification if protected)
+    ↓
+Controller (Business logic)
+    ↓
+Model (Database interaction with Mongoose)
+    ↓
+Response (JSON response to client)</code></pre>
+
+            <h3>Data Flow</h3>
+            <ul style="margin-left: 20px; line-height: 2;">
+                <li>User submits credentials</li>
+                <li>Controller validates input</li>
+                <li>Model checks database</li>
+                <li>Password is hashed/compared</li>
+                <li>JWT token is generated</li>
+                <li>Token is returned to client</li>
+                <li>Client uses token for protected routes</li>
+            </ul>
+        </div>
+
+        <!-- Future Enhancements -->
+        <div class="section">
+            <h2>🔮 Future Enhancement Ideas</h2>
+
+            <div class="features">
+                <div class="feature-card">
+                    <strong>📧 Email Verification</strong>
+                    Verify user email during registration
+                </div>
+                <div class="feature-card">
+                    <strong>🔄 Refresh Tokens</strong>
+                    Implement refresh token rotation
+                </div>
+                <div class="feature-card">
+                    <strong>🔐 Password Reset</strong>
+                    Email-based password recovery
+                </div>
+                <div class="feature-card">
+                    <strong>👥 Role-Based Access</strong>
+                    Admin, user, moderator roles
+                </div>
+                <div class="feature-card">
+                    <strong>⏱️ Rate Limiting</strong>
+                    Prevent brute force attacks
+                </div>
+                <div class="feature-card">
+                    <strong>📚 API Documentation</strong>
+                    Swagger/OpenAPI documentation
+                </div>
+                <div class="feature-card">
+                    <strong>🧪 Unit Tests</strong>
+                    Jest test coverage
+                </div>
+                <div class="feature-card">
+                    <strong>📊 Analytics</strong>
+                    User activity logging
+                </div>
+            </div>
+        </div>
+
+        <!-- Quick Reference -->
+        <div class="section">
+            <h2>⚡ Quick Reference</h2>
+
+            <h3>Common Commands</h3>
+            <pre><code class="language-bash"># Install dependencies
+npm install
+
+# Run development server
+npm run dev
+
+# Run production server
+npm start
+
+# Install a new package
+npm install package-name
+
+# Uninstall a package
+npm uninstall package-name</code></pre>
+
+            <h3>File Purposes</h3>
+            <table class="api-table">
+                <tr>
+                    <th>File</th>
+                    <th>Purpose</th>
+                </tr>
+                <tr>
+                    <td><span class="inline-code">server.js</span></td>
+                    <td>Express app initialization and server startup</td>
+                </tr>
+                <tr>
+                    <td><span class="inline-code">config/db.js</span></td>
+                    <td>MongoDB connection function</td>
+                </tr>
+                <tr>
+                    <td><span class="inline-code">models/User.js</span></td>
+                    <td>User schema with validation and methods</td>
+                </tr>
+                <tr>
+                    <td><span class="inline-code">controllers/authController.js</span></td>
+                    <td>Authentication business logic</td>
+                </tr>
+                <tr>
+                    <td><span class="inline-code">middleware/auth.js</span></td>
+                    <td>JWT token verification middleware</td>
+                </tr>
+                <tr>
+                    <td><span class="inline-code">routes/authRoutes.js</span></td>
+                    <td>API route definitions</td>
+                </tr>
+                <tr>
+                    <td><span class="inline-code">package.json</span></td>
+                    <td>Project dependencies and scripts</td>
+                </tr>
+                <tr>
+                    <td><span class="inline-code">.env</span></td>
+                    <td>Local environment variables</td>
+                </tr>
+            </table>
+        </div>
+
+        <!-- Footer -->
+        <div class="footer">
+            <p>✨ MERN Authentication Backend | Production Ready | April 2026</p>
+            <p style="margin-top: 10px; font-size: 0.9em; opacity: 0.8;">Built with Node.js, Express, MongoDB, and JWT Authentication</p>
+        </div>
+    </div>
+
+    <script>
+        function showTab(evt, tabName) {
+            // Hide all tab content
+            const tabContents = document.querySelectorAll('.tab-content');
+            tabContents.forEach(content => {
+                content.classList.remove('active');
+            });
+
+            // Remove active class from all buttons
+            const tabButtons = document.querySelectorAll('.tab-btn');
+            tabButtons.forEach(btn => {
+                btn.classList.remove('active');
+            });
+
+            // Show the current tab and mark the button as active
+            document.getElementById(tabName).classList.add('active');
+            evt.currentTarget.classList.add('active');
+
+            // Highlight code
+            document.querySelectorAll('pre code').forEach((block) => {
+                hljs.highlightElement(block);
+            });
+        }
+
+        // Initial code highlighting
+        document.querySelectorAll('pre code').forEach((block) => {
+            hljs.highlightElement(block);
+        });
+    </script>
+</body>
+</html>
