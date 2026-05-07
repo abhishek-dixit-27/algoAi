@@ -179,16 +179,23 @@ export function CodeEditor() {
   const [token, setToken] = useState<string>('');
 
   useEffect(() => {
+    // avoid setState synchronously in effect body
     const storedToken = localStorage.getItem('token');
     if (storedToken) {
-      setToken(storedToken);
+      setTimeout(() => setToken(storedToken), 0);
     }
   }, []);
 
   useEffect(() => {
-    const generatedHints = analyzCode(code, selectedProblem.id);
-    setHints(generatedHints);
+    // hints are derived from local state; debounce to avoid cascades
+    const id = window.setTimeout(() => {
+      const generatedHints = analyzCode(code, selectedProblem.id);
+      setHints(generatedHints);
+    }, 0);
+
+    return () => window.clearTimeout(id);
   }, [code, selectedProblem.id]);
+
 
   const handleRunTests = async () => {
     if (!token) {
@@ -202,12 +209,14 @@ export function CodeEditor() {
     try {
       const response = await executeCode(selectedProblem.id, code, language, token);
 
+
       if (response.data.success) {
         const { results, summary, compilationError } = response.data;
 
         // Update test results
-        const testCasesWithResults = selectedProblem.testCases.map(tc => {
-          const result = results.find((r: any) => r.id === tc.id);
+      const testCasesWithResults = selectedProblem.testCases.map(tc => {
+      const result = results.find((r: { id: number; passed?: boolean; error?: string }) => r.id === tc.id);
+
           return {
             ...tc,
             passed: result?.passed,
@@ -228,14 +237,17 @@ export function CodeEditor() {
       } else {
         setOutput(`❌ Error: ${response.data.message}`);
       }
-    } catch (error: any) {
-      setOutput(`❌ Error: ${error.response?.data?.message || error.message}`);
+    } catch (error) {
+      const axiosErr = error as unknown as { response?: { data?: { message?: string } }; message?: string };
+      setOutput(`❌ Error: ${axiosErr?.response?.data?.message || axiosErr?.message || 'Error'}`);
+
     } finally {
       setLoading(false);
     }
-  };
+      };
 
   const handleSubmit = async () => {
+
     if (!token) {
       setOutput('❌ Authentication required. Please login first.');
       return;
@@ -252,7 +264,7 @@ export function CodeEditor() {
         
         // Update test results
         const testCasesWithResults = selectedProblem.testCases.map(tc => {
-          const result = response.data.results.find((r: any) => r.id === tc.id);
+          const result = response.data.results.find((r: { id: number; passed?: boolean; error?: string }) => r.id === tc.id);
           return {
             ...tc,
             passed: result?.passed,
@@ -264,8 +276,10 @@ export function CodeEditor() {
       } else {
         setOutput(`❌ Error: ${response.data.message}`);
       }
-    } catch (error: any) {
-      setOutput(`❌ Error: ${error.response?.data?.message || error.message}`);
+    } catch (error) {
+      const axiosErr = error as unknown as { response?: { data?: { message?: string } }; message?: string };
+      setOutput(`❌ Error: ${axiosErr?.response?.data?.message || axiosErr?.message || 'Error'}`);
+
     } finally {
       setLoading(false);
     }

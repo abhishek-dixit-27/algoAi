@@ -45,7 +45,7 @@ export const Register: React.FC = () => {
     try {
       await register(name, email, password);
       navigate('/dashboard');
-    } catch (err: any) {
+    } catch (err) {
       setError(err.message || 'Registration failed');
     } finally {
       setIsLoading(false);

@@ -1,0 +1,6 @@
+- [ ] Confirm which auth provider file is used by the frontend and ensure only one source of truth.
+- [x] Update `mern-auth-frontend/src/App.tsx` to use `AuthProviderComponent`.
+- [x] Disable duplicate provider in `mern-auth-frontend/src/context/AuthProvider.tsx` to prevent competing providers.
+- [x] Fix lint issues in `AuthProviderComponent.tsx` and `AuthContext.tsx`.
+- [ ] Backend: ensure Mongo/mocking behavior allows login/register.
+- [ ] Retest login/register UI end-to-end.
