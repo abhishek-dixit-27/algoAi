@@ -1,6 +1,22 @@
 import axios from 'axios';
 
-const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000/api/auth';
+const rawApiUrl = import.meta.env.VITE_API_URL as string | undefined;
+
+// Normalize deployed env value.
+// Supported forms:
+// - https://backend.com/api/auth
+// - https://backend.com/api
+// - https://backend.com (backend base)
+const API_URL = rawApiUrl
+  ? rawApiUrl.endsWith('/api/auth')
+    ? rawApiUrl
+    : rawApiUrl.endsWith('/api')
+      ? `${rawApiUrl}/auth`
+      : rawApiUrl.endsWith('/')
+        ? `${rawApiUrl}api/auth`
+        : `${rawApiUrl}/api/auth`
+  : '/api/auth';
+
 
 const api = axios.create({
   baseURL: API_URL,
