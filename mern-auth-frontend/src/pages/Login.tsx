@@ -32,7 +32,8 @@ export const Login: React.FC = () => {
       await login(email, password);
       navigate('/dashboard');
     } catch (err) {
-      setError(err.message || 'Login failed');
+      const e = err as { message?: string };
+      setError(e?.message || 'Login failed');
     } finally {
       setIsLoading(false);
     }
